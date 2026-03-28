@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import logger from "../config/logger.config";
+import { StatusCodes } from "http-status-codes";
 
 export const pingHandler = async (req: Request, res: Response, next: NextFunction) => {
     logger.info("Ping request received");
-    res.status(200).json({ message: "Pong!" });
+    res.status(StatusCodes.OK).json({ message: "Pong!" });
 }
 
 // 1. have some unique id generator
