@@ -9,6 +9,17 @@ export interface AppError extends Error {
     statusCode: number;
 }
 
+abstract class BaseAppError extends Error implements AppError {
+    statusCode: number;
+
+    constructor(message: string, statusCode: number, name: string) {
+        super(message);
+        this.statusCode = statusCode;
+        this.name = name;
+        Object.setPrototypeOf(this, new.target.prototype);
+    }
+}
+
 
 /**
  * Represents an internal server error.
@@ -17,14 +28,9 @@ export interface AppError extends Error {
  * @class InternalServerError
  * @implements {AppError}
  */
-export class InternalServerError implements AppError {
-    statusCode: number;
-    message: string;
-    name: string;
+export class InternalServerError extends BaseAppError {
     constructor(message: string) {
-        this.statusCode = 500;
-        this.message = message;
-        this.name = "InternalServerError";
+        super(message, 500, "InternalServerError");
     }
 }
 
@@ -36,14 +42,9 @@ export class InternalServerError implements AppError {
  * @class BadRequestError
  * @implements {AppError}
  */
-export class BadRequestError implements AppError {
-    statusCode: number;
-    message: string;
-    name: string;
+export class BadRequestError extends BaseAppError {
     constructor(message: string) {
-        this.statusCode = 400;
-        this.message = message;
-        this.name = "BadRequestError";
+        super(message, 400, "BadRequestError");
     }
 }
 
@@ -55,14 +56,9 @@ export class BadRequestError implements AppError {
  * @class NotFoundError
  * @implements {AppError}
  */
-export class NotFoundError implements AppError {
-    statusCode: number;
-    message: string;
-    name: string;
+export class NotFoundError extends BaseAppError {
     constructor(message: string) {
-        this.statusCode = 404;
-        this.message = message;
-        this.name = "NotFoundError";
+        super(message, 404, "NotFoundError");
     }
 }
 
@@ -73,14 +69,9 @@ export class NotFoundError implements AppError {
  * @class UnauthorizedError
  * @implements {AppError}
  */
-export class UnauthorizedError implements AppError {
-    statusCode: number;
-    message: string;
-    name: string;
+export class UnauthorizedError extends BaseAppError {
     constructor(message: string) {
-        this.statusCode = 401;
-        this.message = message;
-        this.name = "UnauthorizedError";
+        super(message, 401, "UnauthorizedError");
     }
 }
 
@@ -93,14 +84,9 @@ export class UnauthorizedError implements AppError {
  * @class ForbiddenError
  * @implements {AppError}
  */
-export class ForbiddenError implements AppError {
-    statusCode: number;
-    message: string;
-    name: string;
+export class ForbiddenError extends BaseAppError {
     constructor(message: string) {
-        this.statusCode = 403;
-        this.message = message;
-        this.name = "ForbiddenError";
+        super(message, 403, "ForbiddenError");
     }
 }
 
@@ -112,14 +98,9 @@ export class ForbiddenError implements AppError {
  * @class ConflictError
  * @implements {AppError}
  */
-export class ConflictError implements AppError {
-    statusCode: number;
-    message: string;
-    name: string;
+export class ConflictError extends BaseAppError {
     constructor(message: string) {
-        this.statusCode = 409;
-        this.message = message;
-        this.name = "ConflictError";
+        super(message, 409, "ConflictError");
     }
 }
 
@@ -131,13 +112,8 @@ export class ConflictError implements AppError {
  * @class NotImplementedError
  * @implements {AppError}
  */
-export class NotImplementedError implements AppError {
-    statusCode: number;
-    message: string;
-    name: string;
+export class NotImplementedError extends BaseAppError {
     constructor(message: string) {
-        this.statusCode = 501;
-        this.message = message;
-        this.name = "NotImplementedError";
+        super(message, 501, "NotImplementedError");
     }
 }

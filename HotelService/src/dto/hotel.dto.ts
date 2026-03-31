@@ -5,3 +5,5 @@ export type createHotelDTO = {
     rating?: number;
     ratingCount?: number;
 }
+
+export type updateHotelDTO = Partial<createHotelDTO>;

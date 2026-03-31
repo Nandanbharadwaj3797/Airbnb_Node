@@ -1,6 +1,17 @@
 import { NextFunction, Request, Response } from "express";
-import { AnyZodObject } from "zod";
+import { AnyZodObject, ZodError } from "zod";
 import logger from "../config/logger.config";
+
+function formatValidationError(error: unknown) {
+    if (error instanceof ZodError) {
+        return error.issues.map((issue) => ({
+            path: issue.path.join('.'),
+            message: issue.message,
+        }));
+    }
+
+    return [{ message: "Validation failed" }];
+}
 
 /**
  * 
@@ -22,7 +33,7 @@ export const validateRequestBody = (schema: AnyZodObject) => {
             res.status(400).json({
                 message: "Invalid request body",
                 success: false,
-                error: error
+                error: formatValidationError(error)
             });
             
         }
@@ -48,7 +59,7 @@ export const validateQueryParams = (schema: AnyZodObject) => {
             res.status(400).json({
                 message: "Invalid query params",
                 success: false,
-                error: error
+                error: formatValidationError(error)
             });
             
         }
@@ -75,7 +86,7 @@ export const validateParams = (schema: AnyZodObject) => {
             res.status(400).json({
                 message: "Invalid request parameters",
                 success: false,
-                error: error
+                error: formatValidationError(error)
             });
             
         }
