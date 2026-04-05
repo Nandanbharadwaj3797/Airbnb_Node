@@ -1,0 +1,81 @@
+{
+  "info": {
+    "name": "BookingService API",
+    "_postman_id": "2f4f4e9f-4f3c-4a67-a4be-e9d1a5ce34b9",
+    "description": "Postman collection for BookingService booking endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Booking",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": 101,\n  \"hotelId\": 10,\n  \"totalGuests\": 2,\n  \"bookingAmount\": 2500\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/bookings",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "bookings"
+          ]
+        },
+        "description": "Creates a booking and returns bookingId + idempotencyKey."
+      },
+      "response": []
+    },
+    {
+      "name": "Confirm Booking",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/bookings/confirm/{{idempotencyKey}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "bookings",
+            "confirm",
+            "{{idempotencyKey}}"
+          ]
+        },
+        "description": "Confirms the booking using idempotencyKey from create booking response."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3001"
+    },
+    {
+      "key": "idempotencyKey",
+      "value": "replace-me-after-create-booking"
+    }
+  ]
+}
