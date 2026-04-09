@@ -5,9 +5,12 @@ export const appErrorHandler = (err: AppError, req: Request, res: Response, next
 
     console.log(err);
 
-    res.status(err.statusCode).json({
+    const statusCode = Number(err?.statusCode) || 500;
+    const message = err?.message || "Internal Server Error";
+
+    res.status(statusCode).json({
         success: false,
-        message: err.message
+        message
     });
 }
 
