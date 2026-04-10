@@ -2,7 +2,8 @@ import { CreateBookingDTO } from '../dto/booking.dto';
 import { confirmBooking, createBooking, createIdempotencyKey, finalizeIdempotencyKey, getIdempotencyKeyWithLock } from '../repositories/booking.repository';
 import { BadRequestError, NotFoundError, InternalServerError } from '../utils/errors/app.error';
 import { generateIdempotencyKey } from '../utils/generateIdempotencyKey';
-import { serverConfig, redlock } from '../config/redis.config';
+import { serverConfig } from '../config';
+import { redlock } from '../config/redis.config';
 
 import prismaClient from "../prisma/client";
 
