@@ -14,6 +14,7 @@
     "bullmq": "^5.73.3",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
+    "handlebars": "^4.7.9",
     "ioredis": "^5.10.1",
     "nodemailer": "^8.0.5",
     "uuid": "^11.1.0",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.0",
+    "@types/nodemailer": "^8.0.0",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
