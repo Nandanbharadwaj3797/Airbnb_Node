@@ -33,14 +33,4 @@ app.listen(serverConfig.PORT,async () => {
     logger.info(`Press Ctrl+C to stop the server.`);
     setupMailerWorker(); 
     logger.info(`Mailer worker setup completed.`);
-
-    addEmailToQueue({
-        to: "nandanbharadwaj4@gamail.com",
-        subject: "Test Email",
-        templateId: "welcome",
-        params: {
-            name: "Nandan Bharadwaj",
-            appName: "Booking App"
-        }
-    })
 });
