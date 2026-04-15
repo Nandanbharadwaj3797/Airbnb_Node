@@ -1,15 +1,23 @@
-import { DataTypes,QueryInterface } from "sequelize";
+import { DataTypes, QueryInterface } from 'sequelize';
 
-module.exports = {
-  async up (queryInterface:QueryInterface) {
-    await queryInterface.addColumn('hotels', 'deleted_at', {
-      type: DataTypes.DATE,
-      allowNull: true,
-      defaultValue: null,
-    });
+export default {
+  async up(queryInterface: QueryInterface) {
+    const table = await queryInterface.describeTable('hotels');
+
+    if (!table.deleted_at) {
+      await queryInterface.addColumn('hotels', 'deleted_at', {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: null,
+      });
+    }
   },
 
-  async down (queryInterface:QueryInterface) {
-    await queryInterface.removeColumn('hotels', 'deleted_at');
-  }
+  async down(queryInterface: QueryInterface) {
+    const table = await queryInterface.describeTable('hotels');
+
+    if (table.deleted_at) {
+      await queryInterface.removeColumn('hotels', 'deleted_at');
+    }
+  },
 };

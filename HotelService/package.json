@@ -5,8 +5,10 @@
   "scripts": {
     "start": "ts-node src/server.ts",
     "dev": "nodemon src/server.ts",
+    "migration:generate": "sequelize-cli migration:generate --name",
     "migrate": "sequelize-cli db:migrate",
-    "rollback": "sequelize-cli db:migrate:undo"
+    "rollback": "sequelize-cli db:migrate:undo",
+    "seeder:generate": "sequelize-cli seed:generate --name"
   },
   "keywords": [],
   "author": "",

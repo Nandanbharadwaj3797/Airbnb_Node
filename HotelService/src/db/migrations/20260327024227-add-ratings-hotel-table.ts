@@ -1,7 +1,7 @@
 import { QueryInterface } from 'sequelize';
 
-module.exports = {
-  async up (queryInterface: QueryInterface) {
+export default {
+  async up(queryInterface: QueryInterface) {
 
     await queryInterface.sequelize.query(`
       ALTER TABLE hotels
@@ -10,11 +10,11 @@ module.exports = {
     `);
   },
 
-  async down (queryInterface: QueryInterface) {
+  async down(queryInterface: QueryInterface) {
     await queryInterface.sequelize.query(`
       ALTER TABLE hotels
       DROP COLUMN rating,
       DROP COLUMN rating_count
     `);
-  }
+  },
 };
